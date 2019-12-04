@@ -1,49 +1,25 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('../config/keys');
-
-var User = require('../database/handleUser');
-
-passport.use(new GoogleStrategy({
-    clientID: keys.GOOGLE_CLIENT_ID,
-    clientSecret: keys.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/auth/google/callback"
-},
-    function (accessToken, refreshToken, profile, cb) {
-        // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        //   return cb(err, user);
-        // });
-        User.findOrCreateUser(profile._json, function(user, err){
-            if (err) throw err;
-            console.log(accessToken);
-            //console.log(refreshToken);
-            console.log('namenenene')
-            console.log(profile._json);
-            console.log('namenenene')
-            console.log(user);
-            console.log(cb);
-            return cb(user);
-        })
-    }
-));
+//require('../services/passport');
 
 //this is the endpoint 
 router.get('/google',
     // strategy is saved as 'google' in library
     passport.authenticate('google',
         // thats what we ask for (scope can be looked up)
-        { scope: ['profile', 'email'] }
+        { scope: ['profile', 'email']}
     )
 );
 
 router.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+   passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
         // Successful authentication, redirect home.
+        console.log('haaaaallooooooooooooo');
+       // res.redirect('/');
         res.send('Successful authentication, redirect home.');
-        res.redirect('/');
+
     }
 );
 
@@ -52,8 +28,33 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource from auth');
 });
 
+router.get('/user', function(req, res){
+    console.log('req.user is :' + JSON.stringify(req.user) );
+    console.log('req.session is :' + JSON.stringify(req.session));
+    res.send(req.user);
+})
+
 router.get('/login', function (req, res, next) {
     res.send('login unsuccessfull');
+});
+
+router.get('/logout', function (req, res, next) {
+    //clears the session object
+    req.logOut();
+    res.send('logout successfull');
+});
+
+//Protect the routes now!!
+function ensureAuthenticated(req, res, next) {
+  //passport function 
+  if (req.isAuthenticated()) {
+      return next();   
+  }
+  res.redirect('./login');
+}
+
+router.get('/mainpage', ensureAuthenticated, function (req, res, next) {
+    res.send('this is protected');
 });
 
 module.exports = router;
