@@ -2,10 +2,39 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+import { BrowserRouter, Route} from 'react-router-dom'; //react-router lib (generic) , react-router-native (for native)
+
+// components 
+import Header from './components/Header';
+const Dashboard = () => <h2>Dashboard</h2>
+const SurveyNew = () => <h2>SurveyNew</h2>
+const Landing = () => <h2>Landing</h2>
+
+//function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
+      {/* inside browser router will be a collection of different routes  (expects at most ONE Child!!!)*/}
+      <BrowserRouter>
+        <div>
+        <img src={logo} className="App-logo" alt="logo" />
+            {/* always show header.. so no route needed */}
+            <Header/>
+            {/* specifi the url and the compnent to decide what set it chechs if the path is CONTAINED */}
+            {/* for the url.. so /survey component will be displayed for the route /survey/details  if the prop  exact={true} is not passed*/}
+          <Route exact={true} path="/" component={Landing} />
+          <Route exact={true} path="/survey" component={Dashboard} />
+          <Route exact={true} path="/survey/new" component={SurveyNew} />
+        </div>
+      </BrowserRouter>
+      
+    </div>
+  );
+}
+
+export default App;
+
+{/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         {/* <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -18,12 +47,5 @@ function App() {
         >
           Learn React
         </a> */}
-        <a className='App-link' href="/auth/google">Sign in with Google and send a request to the express server</a>
-      </header> 
-    </div>
-  );
-}
-
-export default App;
-
-
+    {/*    <a className='App-link' href="/auth/google">Sign in with Google and send a request to the express server</a>*/}
+  //    </header> 
