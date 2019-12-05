@@ -7,7 +7,8 @@ var User = require('../database/handleUser');
 passport.use(new GoogleStrategy({
     clientID: keys.GOOGLE_CLIENT_ID,
     clientSecret: keys.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/auth/google/callback"
+    callbackURL: keys.CALLBACK_URL
+    //, proxy : true if the callback is through a proxy 
 },
     (accessToken, refreshToken, profile, cb) => {
 

@@ -32,7 +32,7 @@ app.use(
     //in milliseconds
     maxAge: 1 * 24 * 60 * 60 * 1000,
     // random signing string 
-    keys: [keys.cookieKey]
+    keys: [keys.COOKIE_KEY]
   })
 )
 app.use(passport.initialize());

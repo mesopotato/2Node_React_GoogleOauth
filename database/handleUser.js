@@ -1,14 +1,15 @@
 const mysql = require('mysql');
+const keys = require('../config/keys');
 
 
 module.exports.findOrCreateUser = function (user, callback) {
 
     // db connection
     const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'nodekurs'
+        host: keys.DATABASE_HOST,
+        user: keys.DATABASE_USER,
+        password: keys.DATABASE_PASSWORD,
+        database: keys.DATABASE_NAME
     });
     connection.connect((err) => {
         if (err) return err;
