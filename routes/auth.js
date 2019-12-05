@@ -30,6 +30,7 @@ router.get('/', function (req, res, next) {
 router.get('/user', function(req, res){
     console.log('req.user is :' + JSON.stringify(req.user) );
     console.log('req.session is :' + JSON.stringify(req.session));
+    console.log('get is in /user');
     res.send(req.user);
 })
 
@@ -40,7 +41,8 @@ router.get('/login', function (req, res, next) {
 router.get('/logout', function (req, res, next) {
     //clears the session object
     req.logOut();
-    res.send('logout successfull');
+    res.redirect('/survey');
+    //res.send('logout successfull');
 });
 
 //Protect the routes now!!
