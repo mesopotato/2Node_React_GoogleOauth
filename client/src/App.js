@@ -7,21 +7,23 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        {/* <p>
           Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
+        </p> */}
+        {/* <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
-        <a href="/auth/google">Sign in with Google</a>
-      </header>
+        </a> */}
+        <a className='App-link' href="/auth/google">Sign in with Google and send a request to the express server</a>
+      </header> 
     </div>
   );
 }
 
 export default App;
+
+
