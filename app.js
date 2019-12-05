@@ -60,6 +60,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// this is in bin/www ..? aparently has to be set this time 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
 
