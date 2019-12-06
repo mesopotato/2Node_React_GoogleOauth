@@ -9,5 +9,6 @@ module.exports = {
     DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
     DATABASE_NAME: process.env.DATABASE_NAME,
     STRIPE_PUBLIC_KEY : process.env.STRIPE_PUBLIC_KEY,
-    STRIPE_SECRET_KEY : process.env.STRIPE_SECRET_KEY
+    STRIPE_SECRET_KEY : process.env.STRIPE_SECRET_KEY,
+    SEND_GRID_KEY : process.env.SEND_GRID_KEY
 }

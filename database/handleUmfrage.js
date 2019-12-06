@@ -50,21 +50,33 @@ module.exports.insertAllRecipients = async function (recipients, fk_umfrage, cal
         // console.log();
     });
 
+    // for checking duplicates
+    let emailHashMap = {};
+
     //does a splitting and also the for loop lol
     var array = await recipients.split(',').map(email => {
-        var recipient = {
-            recipient: email.trim(),
-            fk_umfrage: fk_umfrage,
-            answer: null
-        }
-        // userid is in user.sub .. could also be this search 
-        connection.query('INSERT INTO recipient set ?', recipient, (err, res) => {
-            if (err) throw err;
-            console.log('Last insert ID:', res.insertId);
-            if (!err) {
-                console.log('inserted recipient ');
+
+        if (emailHashMap[email]) {
+            // is duplicate 
+            console.log('duplicate found :' + email);
+        } else {
+            //save for later 
+            emailHashMap[email] = true; 
+
+            var recipient = {
+                recipient: email.trim(),
+                fk_umfrage: fk_umfrage,
+                answer: null
             }
-        });
+            // userid is in user.sub .. could also be this search 
+            connection.query('INSERT INTO recipient set ?', recipient, (err, res) => {
+                if (err) throw err;
+                console.log('Last insert ID:', res.insertId);
+                if (!err) {
+                    console.log('inserted recipient ');
+                }
+            });
+        }
     })
     callback(array);
 }
