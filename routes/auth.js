@@ -58,4 +58,5 @@ router.get('/mainpage', ensureAuthenticated, function (req, res, next) {
     res.send('this is protected');
 });
 
+
 module.exports = router;

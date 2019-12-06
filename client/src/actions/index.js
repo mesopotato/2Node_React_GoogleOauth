@@ -27,3 +27,13 @@ export const fetchUser = () =>
             payload: res.data
         });
     };
+
+    // reusing this type and extend the user model for this time
+export const handleToken  = (token) => 
+    async dispatch => {
+        const res = await axios.post('/billing/stripe', token);
+        dispatch({
+            type: FETCH_USER,
+            payload: res.data
+        })
+    }

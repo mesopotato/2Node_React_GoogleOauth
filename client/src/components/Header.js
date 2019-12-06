@@ -14,6 +14,7 @@ class Header extends Component {
                 return [
                     // elements must have a key attribute when returning multiple 
                     <li key="1" ><Payments/></li>,
+                    <li key="3" style={{margin: '0 10px'}}> Credits : {this.props.auth.konto * 0.01}</li>,
                     <li key="2" ><a href="auth/logout">Logout</a></li>
                 ];
         }

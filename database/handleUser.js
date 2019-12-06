@@ -32,7 +32,8 @@ module.exports.findOrCreateUser = function (user, callback) {
                 var insert = {
                     name: user.name,
                     email: user.email,
-                    picture: user.picture
+                    picture: user.picture,
+                    konto: 0
                 }
                 console.log('insert : ' + JSON.stringify(insert));
                 connection.query('INSERT INTO user set ?', insert, (err, res) => {
@@ -71,4 +72,28 @@ module.exports.findUser = function (_json, callback) {
             callback(rows[0])
         }
     });
+}
+
+module.exports.updateUserCredit = function (amount, id, callback) {
+
+    // db connection
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'nodekurs'
+    });
+    connection.connect((err) => {
+        if (err) return err;
+        console.log('Connected!  ');
+        //console.log(_json);
+    });
+    connection.query('UPDATE user set konto = ? where id = ?', [amount, id], (err, result) => {
+        if (err) return err;
+        // console.log('Data received from Db:\n');
+        // console.log(rows);
+        if (!err) {
+            callback(result)
+        }
+    })
 }
