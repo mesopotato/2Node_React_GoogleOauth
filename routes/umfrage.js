@@ -50,7 +50,8 @@ router.post('/', ensureAuthenticated, ensureCredit, async function (req, res) {
     req.logIn(req.user, function (err) {
         if (err) { return (err); }
         console.log('login with user : '+ JSON.stringify(user));
-        return res.send(user, umfrage);
+        //return res.send(user, umfrage);
+        return res.send(user);
     });
 
 
