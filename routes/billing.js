@@ -12,7 +12,7 @@ router.post('/stripe', ensureAuthenticated, async function (req, res) {
     console.log(req.body.id);
 
     // bill the card // amount has to me smaller or equal to what was requested 
-    const charge = await stripe.charges.create({
+    await stripe.charges.create({
         amount: 500,
         currency: 'usd',
         description: 'description from backend',
@@ -21,18 +21,16 @@ router.post('/stripe', ensureAuthenticated, async function (req, res) {
     // update the kontostand in the sessionobject 
     req.user.konto += 500;
 
-    User.updateUserCredit(req.user.konto, req.user.id, (response, err) => {
-        if (err) throw err;
-        var user = req.user;
+    await User.updateUserCredit(req.user.konto, req.user.id);
+    var user = req.user;
 
-        // this is needed to send the updated object to the session :)
-        passport.serializeUser(function (user, cb) { cb(null, user); });
-        passport.deserializeUser(function (user, cb) { cb(null, user); });
-        // and the user is logged out .. that needs to be fixed 
-        req.logIn(req.user, function (err) {
-            if (err) { return (err); }
-            return res.send(user);
-        });
+    // this is needed to send the updated object to the session :)
+    passport.serializeUser(function (user, cb) { cb(null, user); });
+    passport.deserializeUser(function (user, cb) { cb(null, user); });
+    // and the user is logged out .. that needs to be fixed 
+    req.logIn(req.user, function (err) {
+        if (err) { return (err); }
+        return res.send(user);
     });
 });
 

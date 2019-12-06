@@ -10,28 +10,12 @@ passport.use(new GoogleStrategy({
     callbackURL: keys.CALLBACK_URL
     //, proxy : true if the callback is through a proxy 
 },
-    (accessToken, refreshToken, profile, cb) => {
+    async (accessToken, refreshToken, profile, cb) => {
 
-        User.findOrCreateUser(profile._json, function (user, err) {
-            if (err) {
-                console.log('callback has err + ' + err);
-                //done(err, null);
-            } else {
-                console.log(accessToken);
-                //console.log(refreshToken);
-                console.log('namenenene')
-                console.log(profile._json);
-                console.log('user object')
-                console.log(user);
-                //console.log(cb);
-                //done(null, user);
-                return cb(err, user);
-            }
-        })
-        // console.log('hei there returning profile ')
-        // return cb(null, profile)
+        var user = await User.findOrCreateUser(profile._json);
+        return cb(null, user);
     }
-    
+
 ));
 
 passport.serializeUser(function (user, cb) {
