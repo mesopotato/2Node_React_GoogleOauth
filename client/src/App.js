@@ -8,9 +8,10 @@ import * as actions from './actions';
 
 // components 
 import Header from './components/Header';
+import Landing from './components/Landing';
 const Dashboard = () => <h2>Dashboard</h2>
 const SurveyNew = () => <h2>SurveyNew</h2>
-const Landing = () => <h2>Landing</h2>
+//const Landing = () => <h2>Landing</h2>
 
 //function App() {
 //const App = () => {
@@ -21,9 +22,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {/* inside browser router will be a collection of different routes  (expects at most ONE Child!!!)*/}
+      
         <BrowserRouter>
+          {/* inside browser router will be a collection of different routes  (expects at most ONE Child!!!)*/}
           <div className="container">
 
             {/* always show header.. so no route needed */}
@@ -37,7 +38,6 @@ class App extends Component {
           </div>
         </BrowserRouter>
 
-      </div>
     );
   }
 }
