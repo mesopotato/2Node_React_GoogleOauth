@@ -15,7 +15,8 @@ class Header extends Component {
                     // elements must have a key attribute when returning multiple 
                     <li key="1" ><Payments/></li>,
                     <li key="3" style={{margin: '0 10px'}}> Credits : {this.props.auth.konto * 0.01}</li>,
-                    <li key="2" ><a href="auth/logout">Logout</a></li>
+                    <li key="2" ><a href="auth/logout">Logout</a></li>,
+                    // <img src={this.props.auth.picture} />
                 ];
         }
     }
@@ -24,7 +25,7 @@ class Header extends Component {
         return (
             <nav>
                 <div className="nav-wrapper">
-                    <div className="container"><Link to={this.props.auth ? '/survey/new' : '/'} className="left brand-logo">Loading / Dashboard</Link></div>
+                    <div className="container"><Link to={this.props.auth ? '/survey/new' : '/'} className="left brand-logo">Loading / Dashboard </Link></div>
 
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         {/* <li><Link>Add credit</Link></li> */}
