@@ -8,6 +8,10 @@ var passport = require('passport');
 var Mailer = require('../services/Mailer');
 var umfrageTemplate = require('../services/emailTemplates/umfrageTemplate');
 
+router.get('/thanks', (req, res) => {
+    res.send('Thanks for klicking :)');
+});
+
 // middlewares are executed one after another 
 router.post('/', ensureAuthenticated, ensureCredit, async function (req, res) {
     //router.post('/',  async function (req, res) {
@@ -34,14 +38,18 @@ router.post('/', ensureAuthenticated, ensureCredit, async function (req, res) {
     // in the template we define the html 
     const mailer = new Mailer(mailObject, umfrageTemplate(umfrage));
 
-    // wait to complete and save  to DB 
-    //await mailer.send();
+  
+    try {  // wait to complete and save  to DB 
 
-    var response = await Umfrage.insertUmfrage(umfrage);
-    await Umfrage.insertAllRecipients(recipients, response.insertId);
-    req.user.konto -= 500;
-    var user = req.user;
-    await User.updateUserCredit(req.user.konto, req.user.id);
+        await mailer.send();
+        var response = await Umfrage.insertUmfrage(umfrage);
+        await Umfrage.insertAllRecipients(recipients, response.insertId);
+        req.user.konto -= 500;
+        var user = req.user;
+        await User.updateUserCredit(req.user.konto, req.user.id);
+    } catch (err) {
+        res.status(422).send(err);
+    }
 
     // this is needed to send the updated object to the session :)
     passport.serializeUser(function (user, cb) { cb(null, user); });
@@ -49,14 +57,14 @@ router.post('/', ensureAuthenticated, ensureCredit, async function (req, res) {
     // and the user is logged out .. that needs to be fixed 
     req.logIn(req.user, function (err) {
         if (err) { return (err); }
-        console.log('login with user : '+ JSON.stringify(user));
+        console.log('login with user : ' + JSON.stringify(user));
         //return res.send(user, umfrage);
         return res.send(user);
     });
 
 
-    // // change please to async :( else we have this nested bullcrap
-    // Umfrage.insertUmfrage(umfrage, (response, err) => {
+    // change please to async :( else we have this nested bullcrap
+    // Umfrage.insertUmfrage(umfrage,  (response, err) => {
     //     if (err) {
     //         console.log(err);
     //         throw err;

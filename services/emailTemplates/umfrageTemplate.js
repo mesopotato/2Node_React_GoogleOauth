@@ -1,3 +1,7 @@
+//
+const keys = require('../../config/keys');
+
+// here we can specify routes for the diffenet answers .. we have the same links for both answers.. 
 module.exports = (umfrage) => {
    return `
       <html>
@@ -7,10 +11,10 @@ module.exports = (umfrage) => {
                <p>halo questioin in p tag</p>
                <p>${umfrage.body}</p>
                <div>
-                  <a href="http://localhost:3000">YES</a>
+                  <a href="${keys.REDIRECT_DOMAIN}/umfrage/thanks">YES</a>
                </div>
                <div>
-                  <a href="http://localhost:3000">NO</a>
+                  <a href="${keys.REDIRECT_DOMAIN}/umfrage/thanks">NO</a>
                </div>
          </body>
       </html>

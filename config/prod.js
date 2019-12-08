@@ -10,5 +10,7 @@ module.exports = {
     DATABASE_NAME: process.env.DATABASE_NAME,
     STRIPE_PUBLIC_KEY : process.env.STRIPE_PUBLIC_KEY,
     STRIPE_SECRET_KEY : process.env.STRIPE_SECRET_KEY,
-    SEND_GRID_KEY : process.env.SEND_GRID_KEY
+    SEND_GRID_KEY : process.env.SEND_GRID_KEY,
+    //this is for the links in the sendGrid mailer Template 
+    REDIRECT_DOMAIN : process.env.REDIRECT_DOMAIN
 }

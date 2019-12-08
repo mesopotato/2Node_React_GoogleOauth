@@ -11,8 +11,8 @@ import reducers from './reducers';
 import * as serviceWorker from './serviceWorker';
 
 //for postman and the authentication cookies // in the console of the browsr tipe axios to use 
-import axios from 'axios';
-window.axios = axios;
+//import axios from 'axios';
+//window.axios = axios;
 
 // createStore 1 reducer (if none "() => []"), 2 initial state (here an empty object), 3 middleware 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk))
