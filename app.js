@@ -34,7 +34,10 @@ app.use(
     //in milliseconds
     maxAge: 1 * 24 * 60 * 60 * 1000,
     // random signing string 
-    keys: [keys.COOKIE_KEY]
+    keys: [keys.COOKIE_KEY],
+    //
+    //sameSite: "None",
+    //secure: keys.SECURE_COOKIE
   })
 )
 app.use(passport.initialize());

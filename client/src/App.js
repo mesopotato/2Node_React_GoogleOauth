@@ -9,8 +9,10 @@ import * as actions from './actions';
 // components 
 import Header from './components/Header';
 import Landing from './components/Landing';
-const Dashboard = () => <h2>Dashboard</h2>
-const SurveyNew = () => <h2>SurveyNew</h2>
+import Dashboard from './components/Dashboard';
+import NewSurvey from './components/surveys/NewSurvey';
+//const Dashboard = () => <h2>Dashboard</h2>
+//const SurveyNew = () => <h2>SurveyNew</h2>
 //const Landing = () => <h2>Landing</h2>
 
 //function App() {
@@ -33,8 +35,8 @@ class App extends Component {
             {/* for the url.. so /survey component will be displayed for the route /survey/details  if the prop  exact={true} is not passed*/}
             <Route exact={true} path="/" component={Landing} />
             <Route exact={true} path="/survey" component={Dashboard} />
-            <Route exact={true} path="/survey/new" component={SurveyNew} />
-            <img src={logo} className="App-logo" alt="logo" />
+            <Route exact={true} path="/survey/new" component={NewSurvey} />
+            {/* <img src={logo} className="App-logo" alt="logo" /> */}
           </div>
         </BrowserRouter>
 
