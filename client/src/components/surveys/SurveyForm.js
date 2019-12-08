@@ -23,7 +23,7 @@ class SurveyForm extends Component {
                     label="Subject Line"
                 />
                 <Field
-                    type="text"
+                    type="text-area"
                     name="body"
                     component={SurveyField}
                     label="Email Body "

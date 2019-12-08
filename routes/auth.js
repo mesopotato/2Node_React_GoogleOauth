@@ -40,6 +40,7 @@ router.get('/login', function (req, res, next) {
 
 router.get('/logout', function (req, res, next) {
     //clears the session object
+    console.log('logging out !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ')
     req.logOut();
     res.redirect('/survey');
     //res.send('logout successfull');
