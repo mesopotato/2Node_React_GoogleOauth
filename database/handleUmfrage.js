@@ -47,7 +47,7 @@ module.exports.insertAllRecipients = function (recipients, fk_umfrage) {
         let emailHashMap = {};
 
         //does a splitting and also the for loop lol
-        var array = await recipients.split(',').map(email => {
+        var array = await recipients.map(email => {
 
             if (emailHashMap[email]) {
                 // is duplicate 

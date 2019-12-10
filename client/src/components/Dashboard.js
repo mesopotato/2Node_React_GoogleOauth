@@ -10,6 +10,7 @@ const Dashboard = () => {
                     <i className="large material-icons">add</i>
                 </Link>
             </div>
+            <p> halo? </p>
         </div>
     )
 }

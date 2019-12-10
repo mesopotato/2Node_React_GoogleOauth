@@ -42,7 +42,7 @@ class Mailer extends helper.Mail {
     } 
 
     formatAddresses(recipients){
-         var array = recipients.split(',').map(email => {
+         var array = recipients.map(email => {
             console.log('Splitted in Mailer email is '+email);
             return new helper.Email(email);
         });
