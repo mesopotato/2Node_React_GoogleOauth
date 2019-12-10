@@ -41,7 +41,7 @@ class SurveyForm extends Component {
         return (
             <div>
                 {/* handlesubmit is a predefined function but if we define there a own function this will be executed */}
-                <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+                <form onSubmit={this.props.handleSubmit(() => this.props.onSurveySubmit())}>
 
                     {this.renderFields()}
 
@@ -84,16 +84,21 @@ function validate(values) {
             errors[name] = noValueError + ' ' + label;
         }
     })
-    if (values.recipients != undefined) {
+    if (values.recipients !== undefined) {
         console.log('recipients are commin');
         // this is not behaving correctly as the errors are assigned not to a sttribute wich is then found in the array (no such name found)
-        // error should be assigned to a error.name that exists in the values.. hmmm 
+        // error should be assigned to a error.name that exists in the values.. hmmm i fixed validation with the type "email" for now
         errors.recipients = validateEmail(values.recipients);
+        console.log('error.recipients: ' + JSON.stringify(errors.recipients));
     }
     return errors;
 }
 //redux form is like the connect helper 
+// when referencing to the same name of the form here surveForm in different components it will share the same store !! 
+// so wizard form is easy 
 export default reduxForm({
     validate: validate,
-    form: 'surveyForm'
+    form: 'surveyForm',
+    // this makes the values stick around .. else it will be dumped lleid 
+    destroyOnUnmount: false
 })(SurveyForm);

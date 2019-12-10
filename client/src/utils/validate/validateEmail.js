@@ -1,7 +1,7 @@
 const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export default (recipients) => {
-    const errors = {};
-    const recipientsArrayErrors = [];
+    var errors = {};
+    var recipientsArrayErrors = [];
     console.log('i amm  validation emails ');
     console.log(recipients);
     //would take a commaseparated string and trim each for spaces 
@@ -15,10 +15,13 @@ export default (recipients) => {
             var recipientError = {};
             console.log('in FOREACH');
             console.log(re.test(recipient));
-            if (!re.test(recipient)) {
-                console.log('THIIIIIS IS AN INVALIS EMALI');
-                recipientError[recipientIndex] = 'Invalid Email';
-                recipientsArrayErrors[recipientIndex] = recipientError;
+            if (!re.test(recipient) && recipient !== undefined) {
+                console.log('THIIIIIS IS AN INVALIS EMALI' + recipients[recipientIndex]);
+                recipientError = 'Invalid Email';
+                var recipientName = 'recipients[' + recipientIndex +']';
+                console.log('name attribute ' + recipientName);
+
+                recipientsArrayErrors.push({[recipientName]: recipientError});
                 console.log('recipientsArrayErrors');
                 console.log(JSON.stringify(recipientsArrayErrors));
             }
