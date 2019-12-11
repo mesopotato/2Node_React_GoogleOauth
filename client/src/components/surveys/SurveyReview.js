@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 const SurveyReview = ({ onSurveyEdit, formValues }) => {
 
-
-
     return (
         <div>
             <h3>review that shit</h3>
@@ -22,6 +20,7 @@ const SurveyReview = ({ onSurveyEdit, formValues }) => {
                     <label>Email body </label>
                     <h2>{formValues.body}</h2>
                 </div>
+                {/* here i iterate over the array made by FIeldArray  */}
                 {formValues.recipients.map((recipient, index) => (
                     <div>
                         <label key={`label${index}`}>Recipients</label>

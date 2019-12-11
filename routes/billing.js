@@ -20,6 +20,7 @@ router.post('/stripe', ensureAuthenticated, async function (req, res) {
     });
     // update the kontostand in the sessionobject 
     req.user.konto += 500;
+    console.log('______!!!!!!!______updating user konto with VALUE :' + req.user.konto);
 
     await User.updateUserCredit(req.user.konto, req.user.id);
     var user = req.user;
