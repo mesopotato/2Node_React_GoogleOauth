@@ -9,14 +9,11 @@ import renderRecipient from './renderRecipient';
 import { Link } from 'react-router-dom';
 import validateEmail from '../../utils/validate/validateEmail';
 
+
 // generalizing the changing attributes in the field and  iterate over this FIELDS array with help from lodash
-// those attributes can be retieved form state or props ;)
-const FIELDS = [
-    { label: 'Survey Title', name: 'title', noValueError: 'You must provide a' },
-    { label: 'Subject Line', name: 'subject', noValueError: 'You must provide a' },
-    { label: 'Email Body ', name: 'body', noValueError: 'You must provide a' },
-    // { label: 'Recipients List', name: 'recipients', noValueError: 'You must provide a' }
-]
+// those attributes can be retieved form state or props ;) 
+import formFIELDS from './formFIELDS';
+
 
 
 class SurveyForm extends Component {
@@ -26,7 +23,7 @@ class SurveyForm extends Component {
         // })
         // so here we render 4 <Field/> as the FIELD array contains 4 objects 
         // directly pulling the attributes from the object is prettier (during iteration the "field will be equal to the object in the FIELD array")
-        return _.map(FIELDS, ({ label, name }) => {
+        return _.map(formFIELDS, ({ label, name }) => {
             return <Field
                 component={renderField}
                 type="text"
@@ -45,7 +42,7 @@ class SurveyForm extends Component {
 
                     {this.renderFields()}
 
-                    <FieldArray name="recipients" component={renderRecipient} />
+                    <FieldArray name="recipients" component={renderRecipient} recipients />
 
                     <Link to="/survey" className="red btn-flat white-text">
                         Cancel
@@ -77,7 +74,7 @@ function validate(values) {
     //     errors.title = 'You must provide a name';
     // }
 
-    _.each(FIELDS, ({ name, label, noValueError }) => {
+    _.each(formFIELDS, ({ name, label, noValueError }) => {
 
         // no values.name 
         if (!values[name]) {
@@ -100,5 +97,10 @@ export default reduxForm({
     validate: validate,
     form: 'surveyForm',
     // this makes the values stick around .. else it will be dumped lleid 
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    initialValues: {
+        "recipients": [
+            "add a Recipient"
+          ]
+      }
 })(SurveyForm);

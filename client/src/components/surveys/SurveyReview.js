@@ -1,34 +1,40 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import formFIELDS from './formFIELDS';
 
+import _ from 'lodash';
 
+//pulling in the formValues as props (pulled from the redux store down in the connect function )
 const SurveyReview = ({ onSurveyEdit, formValues }) => {
 
+    // mapping over the different field to define the values centrally.. 
+    // formValues our of the redux store have the prop name of the label so i can search for them dynamically with formValues[field.name]
+    //EJS 6 allows us even to pull out just the attributes that we jant by repalcing "field" by ({ label, name }) and then simply referring to them in the return statuement
+    const reviewFields = _.map(formFIELDS, field => {
+        return (
+            <div>
+
+                <label>{field.label}</label>
+                <div>
+                    {formValues[field.name]}
+                </div>
+            </div>
+        )
+    })
 
 
     return (
         <div>
             <h3>review that shit</h3>
             <div>
-                <div>
-                    <label>Survey Title</label>
-                    <h2>{formValues.title}</h2>
-                </div>
-                <div>
-                    <label>Survey Subject</label>
-                    <h2>{formValues.subject}</h2>
-                </div>
-                <div>
-                    <label>Email body </label>
-                    <h2>{formValues.body}</h2>
-                </div>
+                {reviewFields}
+
                 {formValues.recipients.map((recipient, index) => (
                     <div>
                         <label key={`label${index}`}>Recipients</label>
-                        <h2 key={`recipient${index}`}>{recipient}</h2>
+                        <p key={`recipient${index}`}>{recipient}</p>
                     </div>
                 ))}
-
 
             </div>
             <button
@@ -40,13 +46,13 @@ const SurveyReview = ({ onSurveyEdit, formValues }) => {
                         <i className="material-icons left">remove_circle</i>
             </button>
 
-
         </div>
     )
 
 }
 
 function mapStateToProps(state) {
+    console.log(state)
     // the returned values are then assigned as props
     return { formValues: state.form.surveyForm.values };
 }
