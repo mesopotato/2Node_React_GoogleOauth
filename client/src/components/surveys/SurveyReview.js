@@ -45,6 +45,14 @@ const SurveyReview = ({ onSurveyEdit, formValues }) => {
             >Edit form
                         <i className="material-icons left">remove_circle</i>
             </button>
+            <button
+                type="button"
+                title="Remove recipient"
+                className="yellow darken-3 btn-flat  white-text"
+                onClick={onSurveyEdit}
+            >Edit form
+                        <i className="material-icons left">remove_circle</i>
+            </button>
 
         </div>
     )

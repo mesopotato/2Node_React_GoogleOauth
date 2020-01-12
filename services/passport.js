@@ -19,8 +19,10 @@ passport.use(new GoogleStrategy({
 ));
 
 passport.serializeUser(function (user, cb) {
-    console.log('in SErialize USER__________________________________________USER');
-    cb(null, user);
+
+        console.log('in SErialize USER__________________________________________USER');
+        cb(null, user);
+    
 });
 
 passport.deserializeUser(function (obj, cb) {

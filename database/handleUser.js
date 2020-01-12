@@ -42,7 +42,19 @@ module.exports.findOrCreateUser = function (user) {
                         console.log('Last insert ID:', res.insertId);
                         if (!err) {
                             console.log('callbacking ')
-                            resolve(res)
+                            connection.query('SELECT * FROM user where id = ?', res.insertId, (err, rows, fields) => {
+                                console.log('err wäre' + err);
+                                if (err) return reject(err);
+                                // console.log('Data received from Db:\n');
+                                // console.log(rows);
+                                if (!err) {
+                                    console.log('rows sind :' + rows[0]);
+                                    if (rows[0] != undefined) {
+                                        console.log('not undefined rows[0')
+                                        resolve(rows[0])
+                                    }
+                                }
+                            })
                         }
                     });
                 }
