@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import SurveyForm from './SurveyForm';
 import SurveryReview from './SurveyReview';
+import {reduxForm } from 'redux-form';
 
 class NewSurvey extends Component {
     // constructor(props){
@@ -31,4 +32,8 @@ class NewSurvey extends Component {
         )
     }
 }
+// export default reduxForm({
+//     from: 'surveyForm'
+// })(NewSurvey);
+
 export default NewSurvey;

@@ -28,6 +28,19 @@ export const fetchUser = () =>
         });
     };
 
+    //action creator 
+export const submitSurvey = (values, history) => 
+    async dispatch => {
+        const res = await axios.post('/umfrage', values);
+        // for redirecting when calling this action creator
+        history.push('/survey')
+
+        dispatch ({
+            type: FETCH_USER,
+            payload: res.data
+        });
+    };
+
     // reusing this type and extend the user model for this time
 export const handleToken  = (token) => 
     async dispatch => {
