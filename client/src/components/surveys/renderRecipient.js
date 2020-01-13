@@ -3,11 +3,13 @@ import renderField from './renderField';
 import { Field } from 'redux-form';
 //import validate from '../../utils/validate';
 
+
 export default ({ fields, meta: { error } }) => {
     return (
         <ul>
+            
             <li>
-                <button type="button" className="teal btn-flat left white-text" onClick={() => fields.push()}>
+                <button type="button" className="teal btn-flat left white-text" onClick={() => fields.push() }>
                     Add Recipient
                     <i className="material-icons left">add</i>
                 </button>
@@ -26,6 +28,7 @@ export default ({ fields, meta: { error } }) => {
                         name={recipient}
                         type="email"
                         component={renderField}
+                        noValueError='Please Provide at least one recipient'
                         label={`Recipient #${index + 1}`}
                     />
                 </li>
